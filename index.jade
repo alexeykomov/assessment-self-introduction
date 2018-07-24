@@ -1,0 +1,453 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+
+    title.
+      Physics of momentum scrolling - presentation
+
+    link(rel='stylesheet', href='css/reveal.css')
+    link(rel='stylesheet', href='css/theme/white.css')
+    link(rel='stylesheet', href='css/all.css')
+    //Theme used for syntax highlighting of code.
+    link(rel='stylesheet', href='lib/css/xcode.css')
+
+    //Printing and PDF exports..
+    script.
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+  body
+    div.reveal
+      div.slides
+
+        section
+          h1.
+            Physics of momentum scrolling
+          h3
+            p
+              span.
+                Alexey, EPAM
+            p
+              a(href='http://alexeykomov.me').
+                http://alexeykomov.me
+
+        section
+          h1.
+            I will speak of
+          h2
+            ul
+              li.
+                GMail for iOS web app algo
+              li.
+                How it can be useful
+
+        section
+          h1.
+            Inertia
+          p.
+            First law of motion
+
+        section
+          h1.
+            Bodies with different mass
+          p.bezier-cont.bezier-cont-light
+            i.rigid-body.rigid-body-light
+          p.bezier-cont.bezier-cont-heavy
+            i.rigid-body.rigid-body-heavy
+
+        section
+          h1.
+            History
+          h2.
+            When did native implementations appear?
+          div.fragment(data-fragment-index=0)
+            p.
+              iOS 5
+            p.
+              -webkit-overflow-scrolling: touch
+            p.
+              we can leave artificial scrollers behind
+
+        section
+          h2.
+            ...can we?
+
+        section
+          h3.
+            The problem
+          video(loop='true', data-autoplay='true')
+            source(data-src='video/native-scroll-problem-hd.mp4', type='video/mp4')
+            source(data-src='video/native-scroll-problem.mp4', type='video/mp4')
+
+        section
+          h3.
+            Google's GMail solution
+          video(loop='true', data-autoplay='true')
+            source(data-src='video/gmail-scroll-hd.mp4', type='video/mp4')
+            source(data-src='video/gmail-scroll.mp4', type='video/mp4')
+
+        section
+          h1.
+            How did they implemented this?
+
+        section
+          h1.
+            We can find out by...
+          h2
+            ul
+              li
+                a(href='https://web.archive.org/web/20141001100814/https://developers.google.com/mobile/articles/webapp_fixed_ui#bg').
+                  Blog
+                span.
+                  &nbsp;post
+              li.
+                Looking into code
+
+        section
+          h1.
+            Three "T"s
+          h2
+            ul
+              li.
+                Transform
+              li.
+                Translate
+              li.
+                Transition
+
+        section
+          h1.
+            Let's divide algo to three parts
+
+        section
+          h1.
+            Part 1 - deceleration
+
+        section
+          h3.
+            Natural deceleration - in motion
+          video(loop='true', data-autoplay='true')
+            source(data-src='video/deceleration-hd.mp4', type='video/mp4')
+            source(data-src='video/deceleration.mp4', type='video/mp4')
+
+        section
+          h3.
+            And in physics?
+          p(class='fragment', data-fragment-index=0).
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>v</mi><mo>&#x000A0;</mo><mo>=</mo><mo>&#x000A0;</mo><msub><mi>v</mi><mn>0</mn></msub><mo>&#x000A0;</mo><mo>+</mo><mo>&#x02009;</mo><mi>a</mi><mi>t</mi><mspace linebreak="newline"/></math>
+          p(class='fragment', data-fragment-index=1).
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi><mo>&#x000A0;</mo><mo>=</mo><mo>&#x000A0;</mo><msub><mi>x</mi><mn>0</mn></msub><mo>&#x000A0;</mo><mo>+</mo><mo>&#x000A0;</mo><msub><mi>v</mi><mn>0</mn></msub><mi>t</mi><mo>&#x000A0;</mo><mo>+</mo><mo>&#x02009;</mo><mfrac><mrow><mi>a</mi><msup><mi>t</mi><mn>2</mn></msup></mrow><mn>2</mn></mfrac></math>
+
+        section
+          h3.
+            Let's see some code
+          pre.stretch
+            code.javascript.code.
+              doMomentum() {
+                const transition =
+                    `transform ${time
+                    }ms cubic-bezier(0.33, 0.66, 0.66, 1)`;
+
+                this.setTransition(this.element, transition);
+
+                this.setTransform(this.element,
+                    `translate3d(0, ${newY}px, 0)`);
+              }
+
+        section
+          h1.
+            Three "T"s
+          h2
+            ul
+              li(class='fragment', data-fragment-index=0).
+                Transform
+              li(class='fragment', data-fragment-index=1).
+                Translate
+              li(class='fragment', data-fragment-index=2).
+                Transition
+
+        section
+          h3.
+            Code
+          pre.stretch
+            code.javascript.code.
+              doMomentum() {
+                const transition =
+                    `transform ${time
+                    }ms cubic-bezier(0.33, 0.66, 0.66, 1)`;
+
+                this.setTransition(this.element, transition);
+
+                this.setTransform(this.element,
+                    `translate3d(0, ${newY}px, 0)`);
+              }
+
+        section
+          h3.
+            What about time and Δx?
+          p(class='fragment', data-fragment-index=0).
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>t</mi><mo>=</mo><mfrac><mrow><mi>v</mi><mo>-</mo><msub><mi>v</mi><mn>0</mn></msub></mrow><mi>a</mi></mfrac></math>
+          p(class='fragment', data-fragment-index=1).
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>&#x00394;</mi><mi>x</mi><mo>=</mo><mfrac><mrow><msup><mi>v</mi><mn>2</mn></msup><mo>-</mo><msup><msub><mi>v</mi><mn>0</mn></msub><mn>2</mn></msup></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac><mspace linebreak="newline"/></math>
+
+        section
+          h3.
+            And acceleration (well... it's deceleration)?
+          p.fragment(data-fragment-index=0).
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>a</mi><mo>&#xA0;</mo><mo>=</mo><mn>0</mn><mo>.</mo><mn>005</mn><mfrac bevelled="true"><mrow><mi>p</mi><mi>x</mi></mrow><msup><mi>ms</mi><mn>2</mn></msup></mfrac></math>
+
+        section
+          h3.
+            Code
+          pre.stretch
+            code.javascript.code.
+              doMomentum() {
+                const transition =
+                    `transform ${time
+                    }ms cubic-bezier(0.33, 0.66, 0.66, 1)`;
+
+                this.setTransition(this.element, transition);
+
+                this.setTransform(this.element,
+                    `translate3d(0, ${newY}px, 0)`);
+              }
+
+        section
+          h3.
+            Natural deceleration
+          p.bezier-cont.bezier-cont1
+            i.rigid-body
+          pre
+            code.javascript.
+              cubic-bezier(.33, .66, .66, 1)
+          img(src='img/bezier1.png', alt='Natural deceleration function',
+              class='white-background')
+
+        section
+          h3.
+            Natural deceleration - in motion
+          video(loop='true', data-autoplay='true')
+            source(data-src='video/deceleration-hd.mp4', type='video/mp4')
+            source(data-src='video/deceleration.mp4', type='video/mp4')
+
+        section
+          h1.
+            Part 2 - snap to bounds
+
+        section
+          h3.
+            Snapping to bounds
+          video(loop='true', data-autoplay='true')
+            source(data-src='video/snap-to-bounds-hd.mp4', type='video/mp4')
+            source(data-src='video/snap-to-bounds.mp4', type='video/mp4')
+
+        section
+          h3.
+            What if we're past the bounds?
+          pre.stretch
+            code.javascript.code.
+              snapToBounds() {
+                const transition = 'transform' +
+                  '500ms ease-out';
+                this.setTransition(this.element,
+                    transition);
+
+                this.setTransform(this.element,
+                    `translate3d(0, ${startY}px, 0)`);
+              }
+
+        section
+          h3.
+            Snap to bounds
+          p.bezier-cont.bezier-cont2
+            i.rigid-body
+          pre
+            code.javascript.
+              cubic-bezier(0, 0, .58, 1), ease-out
+          img(src='img/bezier2.png', alt='Ease out function',
+              class='white-background')
+
+        section
+          h3.
+            Snapping to bounds
+          video(loop='true', data-autoplay='true')
+            source(data-src='video/snap-to-bounds-hd.mp4', type='video/mp4')
+            source(data-src='video/snap-to-bounds.mp4', type='video/mp4')
+
+        section
+          h1.
+            Part 3 - crossing the bounds
+
+        section
+          h3.
+            Crossing the bounds
+          video(loop='true', data-autoplay='true')
+            source(data-src='video/three-stages-hd.mp4', type='video/mp4')
+            source(data-src='video/three-stages.mp4', type='video/mp4')
+
+        section
+          h3.
+            Code for the first part
+          pre.stretch
+            code.javascript.code.
+                const valueToLowerCubicBezierWith =
+                    Math.abs(this.endMomentumVelocity_ /
+                    velocity) * .33;
+
+                const transition =
+                    `transform ${time}ms cubic-bezier(.33,${
+                    (.66 - valueToLowerCubicBezierWith)
+                    },.66,${
+                    (1 - valueToLowerCubicBezierWith)})`
+
+                this.setTransition(this.element, transition);
+                this.setTransform(this.element,
+                    `translate3d(0, ${this.contentOffsetY
+                    }px, 0)`);
+
+        section
+          h3
+            div.
+              What about speed when crossing bounds?
+            div.
+              And time?
+          p.
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>v</mi><mo>=</mo><msqrt><msup><msub><mi>v</mi><mn>0</mn></msub><mn>2</mn></msup><mo>-</mo><mn>2</mn><mi>a</mi><mo>&#x02206;</mo><mi>x</mi></msqrt></math>
+          p.
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>t</mi><mo>=</mo><mfrac><mrow><mi>v</mi><mo>-</mo><msub><mi>v</mi><mn>0</mn></msub></mrow><mi>a</mi></mfrac></math>
+
+        section
+          h3.
+            Custom bezier curve depending on end velocity
+          img(src='img/flatten1.png', alt='Flatness degree 1', class='white-background')
+          img(src='img/flatten2.png', alt='Flatness degree 2', class='white-background')
+          img(src='img/flatten3.png', alt='Flatness degree 3', class='white-background')
+
+        section
+          h3.
+            Crossing the bounds
+          video(loop='true', data-autoplay='true')
+            source(data-src='video/three-stages-hd.mp4', type='video/mp4')
+            source(data-src='video/three-stages.mp4', type='video/mp4')
+
+        section
+          h1
+            div.
+              We understood Google's algorithm
+            div.
+              How can we use it?
+
+        section
+          h3.
+            Solution
+          video(loop='true', data-autoplay='true')
+            source(data-src='video/artificial-scroll-hd.mp4', type='video/mp4')
+            source(data-src='video/artificial-scroll.mp4', type='video/mp4')
+
+        section
+          h3.
+            The problem
+          video(loop='true', data-autoplay='true')
+            source(data-src='video/native-scroll-problem-hd.mp4', type='video/mp4')
+            source(data-src='video/native-scroll-problem.mp4', type='video/mp4')
+
+        section
+          h3.
+            Solution
+          video(loop='true', data-autoplay='true')
+            source(data-src='video/artificial-scroll-hd.mp4', type='video/mp4')
+            source(data-src='video/artificial-scroll.mp4', type='video/mp4')
+
+        section
+          h3.
+            It's open-sourced
+          pre
+            code.bash.
+              npm install momentum-scroller
+          p
+            span.
+              Send pull requests to
+            a(href='https://github.com/alexeykomov/momentum-scroller').
+              https://github.com/alexeykomov/momentum-scroller
+
+        section
+          h1.
+            Demo is here
+          img(src='img/qr-code-demo.gif', alt='demo QR code', class='stretch')
+
+        section
+          h1.
+            Presentation is here
+          img(src='img/qr-code-presentation.gif', alt='presentation QR code', class='stretch')
+
+        section
+          h1.
+            Contacts
+          p
+            a(href='http://alexeykomov.me').
+              http://alexeykomov.me
+          p
+            a(href='alexeykcontact@gmail.com').
+              alexeykcontact@gmail.com
+
+        section
+          h1.
+            Wanna thank
+          ul
+            li
+              span.
+                Ryan Fioravanti (
+              a(href='https://twitter.com/rjfioravanti').
+                @rjfioravanti
+              span.
+                ) - for Gmail scrolling
+            li
+              a(href='https://github.com/hakimel/reveal.js').
+                Reveal.js&nbsp;
+              span.
+                - for presentation engine
+            li
+              span.
+                Lea Verou - for&nbsp;
+              a(href='http://cubic-bezier.com/#.17,.67,.83,.67').
+                cubic-bezier.com
+            li
+              a(href='http://www.wiris.com/editor/demo/ru/mathml-latex').
+                Wiris
+              span.
+                &nbsp; - for a MathML editor
+            li
+              a(href='http://qrcoder.ru').
+                qrcoder.ru
+              span.
+                &nbsp; - for QR codes
+            li
+              a(href='http://unsplash.com').
+                Unsplash.com
+              span.
+                - for gorgeous photos
+
+        section
+          h1.
+            Thx for your attention
+
+    script(src='lib/js/head.min.js')
+    script(src='js/reveal.js')
+
+    script.
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          //{ src: 'plugin/markdown/marked.js' },
+          //{ src: 'plugin/markdown/markdown.js' },
+          //{ src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
