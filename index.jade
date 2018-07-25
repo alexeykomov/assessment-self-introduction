@@ -76,23 +76,23 @@ html(lang='en')
             The main driver was my reading about AJAX. I was amazed by how you can change the parts of the web page without full reload.
 
         section
-          p.
-            My first production project was web-calendar application.
+          h3.
+            My first production project was web-calendar application
           p.
             The goal was to build something akin Google Calendar.
 
         section
-          p.
-            Curiously, the maturest open source project of mine is the web-calendar
+          h3.
+            Curiously, my most developed open source project is the web-calendar
           img.white-background.screenshot(src='img/Screen_Shot_2017-09-13_at_15.48.14.png', alt='Calendar application screenshot')
 
         section
-          p.
-            Then, after period of additional studying in university, I joined EPAM at 2011.
+          h3.
+            Then, after period of additional studying in university, I joined EPAM at 2011
 
         section
           h3.
-            At EPAM, I changed several projects.
+            At EPAM, I changed several projects
           h4.
             Without specific naming, let's enumerate them by stacks
           ul
@@ -112,27 +112,27 @@ html(lang='en')
             You write it once and then it can be exported to:
           ul
             li.
-              Netbives,
+              Netbives
             li.
-              iGoogle (remember that Google homepage? 😁),
+              iGoogle (remember that Google homepage? 😁)
             li.
               Google Desktop widgets
             li.
-              Mac OS X platform widgets.
+              Mac OS X platform widgets
             li.
               Mobile web app
 
         section
-          p.
+          h3.
             As you can see, the main difficulties came from large set of supported platforms
 
         section
           h3.
             On to the JVM world...
           p.
-            My next project was mature and established set of J2EE applications for German telecom company
+            My next project was mature and established set of J2EE applications for German telecom company.
           p.
-            Main customers of this app were the employees of the company
+            Main customers of this app were the employees of the company.
 
         section
           h3.
@@ -154,9 +154,9 @@ html(lang='en')
             But it was more interesting than that...
           p.
             Not long before my arrival to the project there were attempts to introduce some
-            newer elements into that stack
+            newer elements into that stack.
           p.
-            Further, after I joined the project, I introduced some other changes
+            Further, after I joined the project, I influenced on some other changes.
 
         section
           h3.
@@ -192,7 +192,7 @@ html(lang='en')
           h3.
             Actually, while I was on project, the stack changed
           p.
-            Initial one was
+            Initial one was:
           ul
             li.
               <a href="https://wiki.qt.io/Qt_WebKit">QTWebkit</a> without any browser chrome
@@ -207,9 +207,7 @@ html(lang='en')
 
         section
           h3.
-            But after a few months, the stack was quite radically changed
-          p.
-            It became
+            But after a few months, the stack became quite radically different
           ul
             li.
               UI is composed of <a href="https://en.wikipedia.org/wiki/Enlightenment_Foundation_Libraries">EFL</a> widgets with JS bindings
@@ -226,8 +224,9 @@ html(lang='en')
           h3.
             After more than 1.5 years, I switched projects again
           p.
-            New one employs more traditional React Native based stack. We develop the mobile application
-            for both iOS and Android.
+            New one employs React Native stack.
+          p.
+            We develop the mobile application for both iOS and Android.
 
         section
           h1.
@@ -246,7 +245,13 @@ html(lang='en')
           h6.
             The task is quite abstract and may appear in many forms
           p.
-            The goal was to allow only one notification to be displayed at a time. It may be displayed for arbitrary period of time. New notifications should be put in FIFO order. Each notification also has a priority that should be respected.
+            The goal was to allow only one notification at a time to be displayed on screen.
+          p.
+            It may be displayed for arbitrary period of time.
+          p.
+            New notifications should be put in FIFO order.
+          p.
+            Each notification also has a priority that should be respected.
 
         section
           h3.
@@ -261,21 +266,29 @@ html(lang='en')
             li.
               Task as a chained sequence of intervals, each one can be aborted
           p.
-            Priority queue was implemented as a map of lists. We didn't need heap-based PQ because
-            number of priorities were about 10 and number of entities (all stacked notifications) rarely approached 10-15 in real production.
+            Priority queue was implemented as a map of lists.
+          p.
+            We didn't need heap-based PQ because number of priorities were about 10 and number of entities (all stacked notifications) rarely approached 10-15 in real production.
 
         section
           h3.
             Introduce feature flags platform
           p.
-            The idea was to introduce flags that enable/disable features currently being in development. So we
-            could ship code for the feature, but left it inactivated for production until fully complete. Meanwhile, testers and other devs can manually flip the flag and preview the feature.
+            The idea was to introduce flags that enable/disable features currently being in development.
+          p.
+            So we could ship code for the feature, but keep it inactivated for production until it's fully complete.
+          p.
+            Meanwhile, testers and developers can manually flip the flag and preview the feature.
 
         section
           h3.
             Specifics for trunk-based model
           p.
-            As we used <a href="https://www.gerritcodereview.com/">Gerrit</a> for code-review, all changes were delivered as single commits. Therefore, to split large change into several smaller ones required us to keep everything working until final patch lands. In this regard, feature flags helped.
+            As we used <a href="https://www.gerritcodereview.com/">Gerrit</a> for code-review, all changes were delivered as single commits.
+          p.
+            Therefore, splitting large change into several smaller ones required us to keep everything working until final patch lands.
+          p.
+            In this regard, feature flags helped.
 
         section
           h3.
@@ -286,6 +299,7 @@ html(lang='en')
             li
               a(href='https://www.coursera.org/learn/algorithmic-toolbox/').
                 Algorithmic toolbox
+            li
               a(href='https://www.coursera.org/learn/data-structures/').
                 Data structures
 
@@ -304,16 +318,14 @@ html(lang='en')
 
         section
           h3.
-            My pet projects including open source ones
-          p.
-            There's a short list
+            My pet projects including open source
           ul
             li.
               <a href="https://reflectcal.com/">Reflect calendar</a> - web calendar which is fast, simple and minimalist.
             li.
               <a href="https://github.com/whisp-messenger">Whisp</a> - encrypted PGP-based messenger on Web. In early stages of development. One can render some UI.
             li.
-              <a href="https://github.com/alexeykomov/momentum-scroller">https://github.com/alexeykomov/momentum-scroller</a> - open source re-implementation of GMail's momentum scroller version.
+              <a href="https://github.com/alexeykomov/momentum-scroller">Momentum scroller</a> - open source re-implementation of GMail's momentum scroller.
             li.
               Couple of other ones in <a href="https://github.com/alexeykomov">https://github.com/alexeykomov</a>.
 
@@ -334,7 +346,7 @@ html(lang='en')
 
         section
           h3.
-            What are my goals and interests for the nearest future
+           My interests and goals for the nearest future
           ul
             li.
               To increase my knowledge of CS (through practise in HackerRank as one of the ways)
@@ -345,7 +357,7 @@ html(lang='en')
             li.
               To get backend experience in containers, services composability, blue-green deployment
           p.
-            In terms of EPAM I want to grow to Chief Software Engineer
+            Within EPAM I want to grow into Chief Software Engineer
 
         section
           h1.
