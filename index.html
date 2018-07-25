@@ -63,23 +63,23 @@
           </p>
         </section>
         <section>
-          <p>My first production project was web-calendar application.</p>
+          <h3>My first production project was web-calendar application</h3>
           <p>
             The goal was to build something akin Google Calendar.
             
           </p>
         </section>
         <section>
-          <p>Curiously, the maturest open source project of mine is the web-calendar</p><img src="img/Screen_Shot_2017-09-13_at_15.48.14.png" alt="Calendar application screenshot" class="white-background screenshot">
+          <h3>Curiously, my most developed open source project is the web-calendar</h3><img src="img/Screen_Shot_2017-09-13_at_15.48.14.png" alt="Calendar application screenshot" class="white-background screenshot">
         </section>
         <section>
-          <p>
-            Then, after period of additional studying in university, I joined EPAM at 2011.
+          <h3>
+            Then, after period of additional studying in university, I joined EPAM at 2011
             
-          </p>
+          </h3>
         </section>
         <section>
-          <h3>At EPAM, I changed several projects.</h3>
+          <h3>At EPAM, I changed several projects</h3>
           <h4>Without specific naming, let's enumerate them by stacks</h4>
           <ul>
             <li>Pure front-end - NWA widgets</li>
@@ -95,10 +95,10 @@
           <h3>Widgets for Netvibes.com</h3>
           <p>You write it once and then it can be exported to:</p>
           <ul>
-            <li>Netbives,</li>
-            <li>iGoogle (remember that Google homepage? 😁),</li>
+            <li>Netbives</li>
+            <li>iGoogle (remember that Google homepage? 😁)</li>
             <li>Google Desktop widgets</li>
-            <li>Mac OS X platform widgets.</li>
+            <li>Mac OS X platform widgets</li>
             <li>
               Mobile web app
               
@@ -106,16 +106,16 @@
           </ul>
         </section>
         <section>
-          <p>
+          <h3>
             As you can see, the main difficulties came from large set of supported platforms
             
-          </p>
+          </h3>
         </section>
         <section>
           <h3>On to the JVM world...</h3>
-          <p>My next project was mature and established set of J2EE applications for German telecom company</p>
+          <p>My next project was mature and established set of J2EE applications for German telecom company.</p>
           <p>
-            Main customers of this app were the employees of the company
+            Main customers of this app were the employees of the company.
             
           </p>
         </section>
@@ -136,10 +136,10 @@
           <h3>But it was more interesting than that...</h3>
           <p>
             Not long before my arrival to the project there were attempts to introduce some
-            newer elements into that stack
+            newer elements into that stack.
           </p>
           <p>
-            Further, after I joined the project, I introduced some other changes
+            Further, after I joined the project, I influenced on some other changes.
             
           </p>
         </section>
@@ -170,7 +170,7 @@
         </section>
         <section>
           <h3>Actually, while I was on project, the stack changed</h3>
-          <p>Initial one was</p>
+          <p>Initial one was:</p>
           <ul>
             <li><a href="https://wiki.qt.io/Qt_WebKit">QTWebkit</a> without any browser chrome</li>
             <li>React-based SPA loaded into browser window</li>
@@ -183,8 +183,7 @@
           </ul>
         </section>
         <section>
-          <h3>But after a few months, the stack was quite radically changed</h3>
-          <p>It became</p>
+          <h3>But after a few months, the stack became quite radically different</h3>
           <ul>
             <li>UI is composed of <a href="https://en.wikipedia.org/wiki/Enlightenment_Foundation_Libraries">EFL</a> widgets with JS bindings</li>
             <li><a href="https://github.com/wayland-project/weston">Weston</a> is used as display server and composite window manager</li>
@@ -198,9 +197,9 @@
         </section>
         <section>
           <h3>After more than 1.5 years, I switched projects again</h3>
+          <p>New one employs React Native stack.</p>
           <p>
-            New one employs more traditional React Native based stack. We develop the mobile application
-            for both iOS and Android.
+            We develop the mobile application for both iOS and Android.
             
           </p>
         </section>
@@ -218,8 +217,11 @@
         <section>
           <h3>Task scheduler for notifications</h3>
           <h6>The task is quite abstract and may appear in many forms</h6>
+          <p>The goal was to allow only one notification at a time to be displayed on screen.</p>
+          <p>It may be displayed for arbitrary period of time.</p>
+          <p>New notifications should be put in FIFO order.</p>
           <p>
-            The goal was to allow only one notification to be displayed at a time. It may be displayed for arbitrary period of time. New notifications should be put in FIFO order. Each notification also has a priority that should be respected.
+            Each notification also has a priority that should be respected.
             
           </p>
         </section>
@@ -231,24 +233,27 @@
             <li>Priority queue of incoming tasks</li>
             <li>Task as a chained sequence of intervals, each one can be aborted</li>
           </ul>
+          <p>Priority queue was implemented as a map of lists.</p>
           <p>
-            Priority queue was implemented as a map of lists. We didn't need heap-based PQ because
-            number of priorities were about 10 and number of entities (all stacked notifications) rarely approached 10-15 in real production.
+            We didn't need heap-based PQ because number of priorities were about 10 and number of entities (all stacked notifications) rarely approached 10-15 in real production.
             
           </p>
         </section>
         <section>
           <h3>Introduce feature flags platform</h3>
+          <p>The idea was to introduce flags that enable/disable features currently being in development.</p>
+          <p>So we could ship code for the feature, but keep it inactivated for production until it's fully complete.</p>
           <p>
-            The idea was to introduce flags that enable/disable features currently being in development. So we
-            could ship code for the feature, but left it inactivated for production until fully complete. Meanwhile, testers and other devs can manually flip the flag and preview the feature.
+            Meanwhile, testers and developers can manually flip the flag and preview the feature.
             
           </p>
         </section>
         <section>
           <h3>Specifics for trunk-based model</h3>
+          <p>As we used <a href="https://www.gerritcodereview.com/">Gerrit</a> for code-review, all changes were delivered as single commits.</p>
+          <p>Therefore, splitting large change into several smaller ones required us to keep everything working until final patch lands.</p>
           <p>
-            As we used <a href="https://www.gerritcodereview.com/">Gerrit</a> for code-review, all changes were delivered as single commits. Therefore, to split large change into several smaller ones required us to keep everything working until final patch lands. In this regard, feature flags helped.
+            In this regard, feature flags helped.
             
           </p>
         </section>
@@ -256,7 +261,8 @@
           <h3>CS advancement</h3>
           <p>The goal was to complete these 2 courses on CS from Coursera:</p>
           <ul>
-            <li><a href="https://www.coursera.org/learn/algorithmic-toolbox/">Algorithmic toolbox</a><a href="https://www.coursera.org/learn/data-structures/">
+            <li><a href="https://www.coursera.org/learn/algorithmic-toolbox/">Algorithmic toolbox</a></li>
+            <li><a href="https://www.coursera.org/learn/data-structures/">
                 Data structures
                 </a></li>
           </ul>
@@ -274,14 +280,13 @@
           </ul>
         </section>
         <section>
-          <h3>My pet projects including open source ones</h3>
-          <p>There's a short list</p>
+          <h3>My pet projects including open source</h3>
           <ul>
-            <li><a href="https://reflectcal.com/">Reflect calendar</a> - web calendar which is fast, simple and minimalist</li>
+            <li><a href="https://reflectcal.com/">Reflect calendar</a> - web calendar which is fast, simple and minimalist.</li>
             <li><a href="https://github.com/whisp-messenger">Whisp</a> - encrypted PGP-based messenger on Web. In early stages of development. One can render some UI.</li>
-            <li><a href="https://github.com/alexeykomov/momentum-scroller">https://github.com/alexeykomov/momentum-scroller</a> - open source re-implementation of GMail's momentum scroller version.</li>
+            <li><a href="https://github.com/alexeykomov/momentum-scroller">Momentum scroller</a> - open source re-implementation of GMail's momentum scroller.</li>
             <li>
-              Couple of other ones in <a href="https://github.com/alexeykomov">https://github.com/alexeykomov</a>
+              Couple of other ones in <a href="https://github.com/alexeykomov">https://github.com/alexeykomov</a>.
               
             </li>
           </ul>
@@ -300,7 +305,7 @@
           </ul>
         </section>
         <section>
-          <h3>What are my goals and interests for the nearest future</h3>
+          <h3>My interests and goals for the nearest future</h3>
           <ul>
             <li>To increase my knowledge of CS (through practise in HackerRank as one of the ways)</li>
             <li>To look into concepts of distributed systems, like CRDT and partially sorted logs</li>
@@ -308,7 +313,7 @@
             <li>To get backend experience in containers, services composability, blue-green deployment</li>
           </ul>
           <p>
-            In terms of EPAM I want to grow to Chief Software Engineer
+            Within EPAM I want to grow into Chief Software Engineer
             
           </p>
         </section>
